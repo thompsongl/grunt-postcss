@@ -13,9 +13,13 @@ var postcss = require("postcss");
  */
 module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
-    var options = this.options();
-    options.namespace = options.namespace || {prefix:'', options:{}};
-    options.import = options.import || {};
+    var options = this.options({
+      namespace: {
+        prefix: '',
+        options: {}
+      },
+      import: {}
+    });
 
     if(options.bemLinter) {
       options.import.onImport = function(files){
