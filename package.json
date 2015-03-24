@@ -1,6 +1,6 @@
 {
   "name": "grunt-postcss",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "PostCSS + cssnext + BEM Linter + (optional) prefixer",
   "files": [
     "tasks"
