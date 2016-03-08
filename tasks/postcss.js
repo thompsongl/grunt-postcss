@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-var assets = require('postcss-copy-assets');
+var assets = require('postcss-url');
 var bemLinter = require('postcss-bem-linter');
 var cssnext = require("cssnext");
 var eachAsync = require("each-async");
@@ -16,22 +16,18 @@ var postcss = require("postcss");
 module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
     var options = this.options({
-      assets: {},
-      namespace: {
-        prefix: '',
-        options: {}
+      assets: {
+        url: 'rebase'
       },
       import: {}
     });
 
-    if(options.bemLinter) {
-      options.import.onImport = function(files){
-        files.forEach(function (file) {
-          var css = fs.readFileSync(file, 'utf-8');
-          postcss().use(bemLinter('suit')).process(css);
-        });
-      };
-    }
+    options.import.onImport = function(files){
+      files.forEach(function (file) {
+        var css = fs.readFileSync(file, 'utf-8');
+        postcss().use(bemLinter('suit')).process(css);
+      });
+    };
 
     eachAsync(this.files, function(el, i, next) {
       options.from = el.src[0];
@@ -41,13 +37,12 @@ module.exports = function(grunt) {
       var output = postcss()
           .use(cssnext(options))
           .use(assets(options.assets))
-          .use(namespace(options.namespace.prefix, options.namespace.options))
           .use(reporter)
           .process(input, {
             from: options.from,
             to: options.to
-          });
-      grunt.file.write(options.to, output);
+          }).css;
+      //grunt.file.write(options.to, output);
       next();
     }, this.async());
   });
