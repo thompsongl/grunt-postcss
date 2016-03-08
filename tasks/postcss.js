@@ -16,10 +16,7 @@ var postcss = require("postcss");
 module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
     var options = this.options({
-      assets: {
-        base: './',
-        pathTransform: undefined
-      },
+      assets: {},
       namespace: {
         prefix: '',
         options: {}
