@@ -17,7 +17,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
     var options = this.options({
       assets: {
-        url: 'rebase'
+        url: 'copy'
       },
       import: {}
     });
@@ -36,6 +36,7 @@ module.exports = function(grunt) {
       var input = fs.readFileSync(options.from, "utf8");
       var output = postcss()
           .use(cssnext(options))
+          .use(assets({url: 'copy'}))
           .use(assets(options.assets))
           .use(reporter)
           .process(input, {
