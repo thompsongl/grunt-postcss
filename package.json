@@ -8,7 +8,7 @@
   "dependencies": {
     "cssnext": "^1.1.0",
     "each-async": "^1.1.1",
-    "postcss": "^4.0.2",
+    "postcss": "^5.0.0",
     "postcss-bem-linter": "^0.2.0",
     "postcss-class-prefix": "^0.1.0",
     "postcss-copy-assets": "^0.3.0",

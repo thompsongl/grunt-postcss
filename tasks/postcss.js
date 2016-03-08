@@ -43,7 +43,10 @@ module.exports = function(grunt) {
           .use(assets(options.assets))
           .use(namespace(options.namespace.prefix, options.namespace.options))
           .use(reporter)
-          .process(input);
+          .process(input, {
+            from: options.from,
+            to: options.to
+          });
       grunt.file.write(options.to, output);
       next();
     }, this.async());
