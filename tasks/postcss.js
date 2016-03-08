@@ -42,7 +42,7 @@ module.exports = function(grunt) {
             from: options.from,
             to: options.to
           }).css;
-      //grunt.file.write(options.to, output);
+      grunt.file.write(options.to, output);
       next();
     }, this.async());
   });
