@@ -17,7 +17,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
     var options = this.options({
       assets: {
-        path: './',
+        assetsPath: './',
         relative: false,
         keepStructure: false,
         renameDuplicates: false
