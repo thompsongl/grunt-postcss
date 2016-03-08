@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-var assets = require('postcss-assets-rebase');
+var assets = require('postcss-copy-assets');
 var bemLinter = require('postcss-bem-linter');
 var cssnext = require("cssnext");
 var eachAsync = require("each-async");
@@ -17,10 +17,8 @@ module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
     var options = this.options({
       assets: {
-        assetsPath: './',
-        relative: false,
-        keepStructure: false,
-        renameDuplicates: false
+        base: './',
+        pathTransform: undefined
       },
       namespace: {
         prefix: '',
