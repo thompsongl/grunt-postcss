@@ -1,10 +1,11 @@
 var fs = require("fs");
 
-var assets = require('postcss-assets');
+var assets = require('postcss-assets-rebase');
 var bemLinter = require('postcss-bem-linter');
 var cssnext = require("cssnext");
 var eachAsync = require("each-async");
 var namespace = require('postcss-class-prefix');
+var reporter = require('postcss-reporter');
 var postcss = require("postcss");
 
 /**
@@ -15,7 +16,12 @@ var postcss = require("postcss");
 module.exports = function(grunt) {
   grunt.registerMultiTask("postcss", "Use tomorrow's CSS syntax, today", function() {
     var options = this.options({
-      assets: {},
+      assets: {
+        path: './',
+        relative: false,
+        keepStructure: false,
+        renameDuplicates: false
+      },
       namespace: {
         prefix: '',
         options: {}
@@ -41,6 +47,7 @@ module.exports = function(grunt) {
           .use(cssnext(options))
           .use(assets(options.assets))
           .use(namespace(options.namespace.prefix, options.namespace.options))
+          .use(reporter)
           .process(input);
       grunt.file.write(options.to, output);
       next();
